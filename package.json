@@ -1,0 +1,9 @@
+{
+    "private": true,
+    "workspaces": ["shared", "backend", "frontend"],
+    "scripts": {
+      "start-frontend:dev": "yarn workspace frontend dev",
+      "start-backend:dev": "yarn workspace backend start:dev",
+      "start:dev": "yarn start-frontend:dev & yarn start-backend:dev"
+    }
+  }
