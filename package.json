@@ -10,5 +10,9 @@
     "start-backend:dev": "yarn workspace backend start:dev",
     "start:dev": "yarn start-frontend:dev & yarn start-backend:dev",
     "format": "yarn workspaces run format"
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "^5.1.0",
+    "prettier": "^2.4.1"
   }
 }

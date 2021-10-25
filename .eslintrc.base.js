@@ -7,9 +7,7 @@ module.exports = {
   parserOptions: {
     project: [
       '../backend/tsconfig.json',
-      '../frontend/tsconfig.json',
-      '../shared/tsconfig.json',
-      '../availability-monitoring/tsconfig.json'
+      '../frontend/tsconfig.json'
     ]
   },
   plugins: ['@typescript-eslint/eslint-plugin'],
