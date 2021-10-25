@@ -2,7 +2,8 @@ import React from 'react';
 
 const Participants: React.FC<ParticipantsProps> = ({ participants }) => {
   return (
-    <section>
+    <section className="flex flex-col p-2">
+      <h1 className="text-4xl text-gray-600 font-bold">Participants</h1>
       {participants.map(participant => (
         <Participant key={participant.identity} {...participant} />
       ))}
@@ -18,9 +19,9 @@ export type ParticipantsProps = {
 
 const Participant: React.FC<ParticipantProp> = ({ identity }) => {
   return (
-    <>
-      <p>{identity}</p>
-    </>
+    <div className="py-2 border-b-2 last:border-0 hover:bg-gray-200">
+      <p className="text-2xl text-gray-600">{identity}</p>
+    </div>
   );
 };
 

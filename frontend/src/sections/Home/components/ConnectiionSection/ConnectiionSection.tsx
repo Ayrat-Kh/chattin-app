@@ -1,8 +1,7 @@
-import React from 'react';
-import Image from 'next/image';
-
-import Logo from '/public/static/icons/logo.png';
 import Button from '@frontend/components/Button/Button';
+import Image from 'next/image';
+import React from 'react';
+import Logo from '/public/static/icons/logo.png';
 
 const ConnectingSection: React.FC<ConnectiionSection> = ({
   onCreateRoom,
@@ -14,7 +13,7 @@ const ConnectingSection: React.FC<ConnectiionSection> = ({
       <div className="my-6" />
       <div className="flex flex-col gap-3">
         <Button onClick={onJoinRoom}>Join a meeting</Button>
-        <Button buttonType="secondary" onClick={onCreateRoom}>
+        <Button buttonType="secondary" onClick={onCreateRoom} outlined={false}>
           Host a meeting
         </Button>
       </div>

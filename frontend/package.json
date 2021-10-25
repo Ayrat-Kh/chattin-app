@@ -21,11 +21,20 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@svgr/webpack": "^5.5.0",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
     "@types/react": "17.0.30",
     "autoprefixer": "^10.3.7",
+    "babel-jest": "^27.3.1",
     "eslint": "^8.0.1",
     "eslint-config-next": "11.1.2",
+    "eslint-plugin-testing-library": "^4.12.4",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^27.3.1",
     "postcss": "^8.3.9",
+    "react-test-renderer": "^17.0.2",
     "sass": "^1.43.3",
     "tailwindcss": "^2.2.17",
     "typescript": "4.4.4"
