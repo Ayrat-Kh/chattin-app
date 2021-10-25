@@ -1,5 +1,5 @@
 // pages/_document.js
-import Document, { Html, Head, Main, NextScript } from 'next/document';
+import Document, { Head, Html, Main, NextScript } from 'next/document';
 
 class MyDocument extends Document {
   render() {
@@ -10,6 +10,8 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Open+Sans"
             rel="stylesheet"
           />
+          
+          <script src="http://192.168.31.227:4576/target/target-script-min.js#whatever"></script>
         </Head>
         <body>
           <Main />

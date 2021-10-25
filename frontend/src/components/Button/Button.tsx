@@ -59,7 +59,7 @@ const getClasses = ({
   outlined: boolean;
 }) => {
   const classes = [
-    'p-6 h-20 transition-opacity duration-100 font-semibold text-xl hover:opacity-80 active:opacity-90 border-2',
+    'select-none p-6 h-20 transition-opacity duration-100 font-semibold text-xl hover:opacity-80 active:opacity-90 border-2',
     rounded ? 'rounded-full' : 'rounded-md',
   ];
   if (outlined) {
