@@ -21,7 +21,7 @@ export const Home: React.FC = () => {
 
   return (
     <main className="grid sm:grid-cols-3 grid-rows-3 h-full m-3 sm:m-0 sm:w-full">
-      <div className="sm:col-start-2 sm:col-end-3 row-start-2 row-end-3 border-gray-300 border p-12 shadow-xl">
+      <div className="flex flex-col sm:col-start-2 sm:col-end-3 row-start-2 row-end-3 border-gray-300 border p-12 shadow-xl">
         <h1 className="text-3xl font-bold text-gray-700">
           {roomHost ? 'Host meeting' : 'Join meeting'}
         </h1>
@@ -53,7 +53,7 @@ const InitRoomForm = ({ isRoomHost }: { isRoomHost: boolean }) => {
   return (
     <form
       onSubmit={handleSubmit(handleSubmitValid)}
-      className="flex flex-col h-[95%]"
+      className="flex flex-col flex-1"
     >
       <Input
         inputProps={register('name')}

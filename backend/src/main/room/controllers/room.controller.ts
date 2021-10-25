@@ -3,7 +3,7 @@ import { RoomService } from '../services/room.service';
 
 @Controller('v1/room')
 export class RoomController {
-  constructor(private readonly roomService: RoomService) { }
+  constructor(private readonly roomService: RoomService) {}
 
   @Post()
   createRoom(): string {
