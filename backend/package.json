@@ -26,10 +26,11 @@
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/platform-fastify": "^8.1.1",
     "@nestjs/platform-socket.io": "^8.1.1",
-    "@nestjs/websockets": "^8.1.1",
+    "@nestjs/websockets": "^8.1.2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
+    "socket.io": "^4.3.1",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
@@ -40,6 +41,7 @@
     "@types/jest": "^27.0.1",
     "@types/node": "^16.0.0",
     "@types/supertest": "^2.0.11",
+    "@types/uuid": "^8.3.1",
     "@typescript-eslint/eslint-plugin": "^4.28.2",
     "@typescript-eslint/parser": "^4.28.2",
     "eslint": "^7.30.0",

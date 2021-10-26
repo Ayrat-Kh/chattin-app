@@ -1,9 +1,32 @@
 {
-    "exclude": ["node_modules"],
+    "exclude": [
+        "node_modules"
+    ],
     "compilerOptions": {
         "baseUrl": "./",
         "paths": {
-            "@frontend/*": ["frontend/src/*"]
-        }
-    }
+            "@frontend/*": [
+                "frontend/src/*"
+            ],
+            "@backend/*": [
+                "backend/src/*"
+            ],
+            "@shared/*": [
+                "shared/src/*"
+            ],
+        },
+        "noFallthroughCasesInSwitch": true,
+        "strictFunctionTypes": true,
+        "noUnusedParameters": true,
+        "noImplicitReturns": true,
+        "strictNullChecks": true,
+        "removeComments": true,
+        "noUnusedLocals": true,
+        "noImplicitThis": true,
+        "noImplicitAny": true,
+        "alwaysStrict": true,
+        "sourceMap": true,
+        "strict": true,
+        "declaration": true,
+    },
 }

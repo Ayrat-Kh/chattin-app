@@ -1,14 +1,15 @@
-import React, { useCallback, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { useDispatch, useSelector } from 'react-redux';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-
 import { ValidatorBuilder } from '@frontend/app/validator-builder/validator-builder';
-import { isRoomHost, setRoomHost } from '@frontend/store/room/room';
-import Input from '@frontend/components/form/Input/Input';
 import Button from '@frontend/components/Button/Button';
 import Checkbox from '@frontend/components/form/Checkbox/Checkbox';
+import Input from '@frontend/components/form/Input/Input';
+import useWss from '@frontend/hooks/useWss';
+import { isRoomHost, setRoomHost } from '@frontend/store/room/room';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useRouter } from 'next/router';
+import React, { useCallback, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 export const Home: React.FC = () => {
   const { query } = useRouter();
@@ -44,6 +45,9 @@ const InitRoomForm = ({ isRoomHost }: { isRoomHost: boolean }) => {
   } = useForm<MeetingFormSchema>({
     resolver: yupResolver(isRoomHost ? hostSchema : joinSchema),
   });
+
+  const wss = useWss();
+
   const handleSubmitValid = (values: MeetingFormSchema) => {
     console.log('values', values);
   };

@@ -1,9 +1,8 @@
-import io from 'socket.io-client';
+import io, { Socket } from 'socket.io-client';
 import { config } from '../config/config';
 
-let socket = null
-
-export const connectWithWSSServer = async () => {
+export const connectWithWSSServer = (): Socket => {
   const socket = io(config.wssServer);
-  socket.on('connect', )
-}
+  socket.on('connect', () => console.log('connected to server'));
+  return socket
+};

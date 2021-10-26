@@ -1,5 +1,4 @@
 {
-  "private": true,
   "workspaces": [
     "shared",
     "backend",
@@ -13,6 +12,8 @@
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^5.1.0",
-    "prettier": "^2.4.1"
-  }
+    "prettier": "^2.4.1",
+    "typescript": "^4.4.4"
+  },
+  "name": "chatting-app"
 }
