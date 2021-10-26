@@ -1,3 +1,3 @@
 export enum WssTypes {
-  CREATE_ROOM = 'create'
-};
+  CREATE_ROOM = 'create',
+}

@@ -12,16 +12,12 @@ const WssProvider: React.FC = ({ children }) => {
     setSocket(socket) {
       setSocketPrivate(state => ({
         ...state,
-        socket
-      }))
+        socket,
+      }));
     },
   });
 
-  return (
-    <WssContext.Provider value={socket}>
-      {children}
-    </WssContext.Provider>
-  );
+  return <WssContext.Provider value={socket}>{children}</WssContext.Provider>;
 };
 
 export default WssProvider;

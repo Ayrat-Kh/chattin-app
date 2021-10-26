@@ -1,22 +1,31 @@
-import { DEFAULT_WSS_PORT } from "@backend/config/constants";
-import { ConnectedSocket, MessageBody, OnGatewayInit, SubscribeMessage, WebSocketGateway } from "@nestjs/websockets";
+import { DEFAULT_WSS_PORT } from '@backend/config/constants';
+import {
+  ConnectedSocket,
+  MessageBody,
+  OnGatewayInit,
+  SubscribeMessage,
+  WebSocketGateway,
+} from '@nestjs/websockets';
 import { WssTypes } from '@shared/types/wss';
 import { Socket } from 'socket.io';
 import { v4 as uuid } from 'uuid';
 
-
-@WebSocketGateway(DEFAULT_WSS_PORT, { namespace: 'room', transports: ['websocket'] })
+@WebSocketGateway(DEFAULT_WSS_PORT, { cors: true })
 export class RoomGateway implements OnGatewayInit {
-  afterInit() {
-  }
+  afterInit() {}
 
   @SubscribeMessage(WssTypes.CREATE_ROOM)
-  async createRoom(@MessageBody() data: { identity: string }, @ConnectedSocket() client: Socket): Promise<{ identity: string, roomId: string }> {
-    const roomId = uuid()
-    await client.join(roomId)
+  async createRoom(
+    @MessageBody() data: { identity: string },
+    @ConnectedSocket() client: Socket,
+  ): Promise<{ identity: string; roomId: string }> {
+    const roomId = uuid();
+    await client.join(roomId);
+
+    console.log(`created room by: ${data.identity}`);
     return {
       ...data,
-      roomId
-    }
+      roomId,
+    };
   }
 }

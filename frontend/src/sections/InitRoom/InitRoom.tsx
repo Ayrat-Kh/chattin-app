@@ -1,3 +1,4 @@
+import { createRoom } from '@frontend/app/services/wss';
 import { ValidatorBuilder } from '@frontend/app/validator-builder/validator-builder';
 import Button from '@frontend/components/Button/Button';
 import Checkbox from '@frontend/components/form/Checkbox/Checkbox';
@@ -10,15 +11,16 @@ import React, { useCallback, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
-
 export const Home: React.FC = () => {
   const { query } = useRouter();
   const dispatch = useDispatch();
   const roomHost = useSelector(isRoomHost);
 
+  console.log('roomHost', roomHost);
+
   useEffect(() => {
     dispatch(setRoomHost(query.host !== undefined));
-  }, [query]);
+  }, [query.host]);
 
   return (
     <main className="grid sm:grid-cols-3 grid-rows-3 h-full m-3 sm:m-0 sm:w-full">
@@ -48,11 +50,15 @@ const InitRoomForm = ({ isRoomHost }: { isRoomHost: boolean }) => {
 
   const [wss] = useWss();
 
-  console.log('rerender')
-  
-  const handleSubmitValid = useCallback((values: MeetingFormSchema) => {
-    console.log('values', values);
-  }, []);
+  const handleSubmitValid = useCallback(
+    (values: MeetingFormSchema) => {
+      console.log('values', wss, isRoomHost);
+      if (isRoomHost && wss !== null) {
+        createRoom(wss, { identity: values.name });
+      }
+    },
+    [wss, isRoomHost],
+  );
 
   const goHome = useCallback(() => void push('/'), [push]);
 
