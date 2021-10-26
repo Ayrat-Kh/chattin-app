@@ -16,8 +16,6 @@ export const Home: React.FC = () => {
   const dispatch = useDispatch();
   const roomHost = useSelector(isRoomHost);
 
-  console.log('roomHost', roomHost);
-
   useEffect(() => {
     dispatch(setRoomHost(query.host !== undefined));
   }, [query.host]);
