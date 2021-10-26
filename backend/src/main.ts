@@ -3,8 +3,8 @@ import {
   FastifyAdapter,
   NestFastifyApplication
 } from '@nestjs/platform-fastify';
-import { DEFAULT_PORT } from './config/constants';
 import { AppModule } from './app.module';
+import { DEFAULT_PORT } from './config/constants';
 
 
 

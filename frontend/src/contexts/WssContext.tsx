@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import { Socket } from 'socket.io-client';
 
 export const WssContext = React.createContext<WssContextType>({
@@ -7,15 +7,18 @@ export const WssContext = React.createContext<WssContextType>({
 });
 
 const WssProvider: React.FC = ({ children }) => {
-  const socketData = useRef<WssContextType>({
+  const [socket, setSocketPrivate] = useState<WssContextType>({
     socket: null,
     setSocket(socket) {
-      this.socket = socket;
+      setSocketPrivate(state => ({
+        ...state,
+        socket
+      }))
     },
   });
 
   return (
-    <WssContext.Provider value={socketData.current}>
+    <WssContext.Provider value={socket}>
       {children}
     </WssContext.Provider>
   );

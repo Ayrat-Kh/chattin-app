@@ -46,11 +46,13 @@ const InitRoomForm = ({ isRoomHost }: { isRoomHost: boolean }) => {
     resolver: yupResolver(isRoomHost ? hostSchema : joinSchema),
   });
 
-  const wss = useWss();
+  const [wss] = useWss();
 
-  const handleSubmitValid = (values: MeetingFormSchema) => {
+  console.log('rerender')
+  
+  const handleSubmitValid = useCallback((values: MeetingFormSchema) => {
     console.log('values', values);
-  };
+  }, []);
 
   const goHome = useCallback(() => void push('/'), [push]);
 

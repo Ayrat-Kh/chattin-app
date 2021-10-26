@@ -5,10 +5,9 @@ import { Socket } from 'socket.io';
 import { v4 as uuid } from 'uuid';
 
 
-@WebSocketGateway(DEFAULT_WSS_PORT, { namespace: 'room' })
+@WebSocketGateway(DEFAULT_WSS_PORT, { namespace: 'room', transports: ['websocket'] })
 export class RoomGateway implements OnGatewayInit {
-  afterInit(server: any) {
-    
+  afterInit() {
   }
 
   @SubscribeMessage(WssTypes.CREATE_ROOM)

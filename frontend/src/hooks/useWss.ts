@@ -1,8 +1,9 @@
 import { connectWithWSSServer } from '@frontend/app/services/wss';
 import { WssContext } from '@frontend/contexts/WssContext';
 import { useCallback, useContext, useEffect, useRef } from 'react';
+import { Socket } from 'socket.io-client';
 
-const useWss = ({ initialize = true }: { initialize?: boolean } = {}) => {
+const useWss = ({ initialize = true }: { initialize?: boolean } = {}): [Socket | null, { reconnect: () => void }] => {
   const wssContext = useContext(WssContext)
   
   const reconnect = useCallback(() => {
@@ -10,7 +11,7 @@ const useWss = ({ initialize = true }: { initialize?: boolean } = {}) => {
       const socket = connectWithWSSServer();
       wssContext.setSocket(socket);
     }
-  }, [wssContext]);
+  }, []);
 
   useEffect(() => {
     if (initialize) {

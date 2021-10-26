@@ -27,6 +27,6 @@
         "alwaysStrict": true,
         "sourceMap": true,
         "strict": true,
-        "declaration": true,
+        "declaration": true
     },
 }
