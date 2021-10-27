@@ -1,4 +1,4 @@
-import { createRoom } from '@frontend/app/services/room.service';
+import { createRoom, joinRoom } from '@frontend/app/services/room.service';
 import { ValidatorBuilder } from '@frontend/app/validator-builder/validator-builder';
 import Button from '@frontend/components/Button/Button';
 import Checkbox from '@frontend/components/form/Checkbox/Checkbox';
@@ -49,9 +49,12 @@ const InitRoomForm = ({ isRoomHost }: { isRoomHost: boolean }) => {
     (values: MeetingFormSchema) => {
       if (isRoomHost) {
         createRoom({ identity: values.name });
+      } else {
+        joinRoom({ identity: values.name, roomId: values.roomId });
       }
+      push('/meet');
     },
-    [isRoomHost],
+    [isRoomHost, push],
   );
 
   const goHome = useCallback(() => void push('/'), [push]);

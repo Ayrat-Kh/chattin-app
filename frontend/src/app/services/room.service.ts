@@ -1,4 +1,4 @@
-import { Events } from '@shared/types/room';
+import { ClientJoin, CreateRoom, Events } from '@shared/types/room';
 import io, { Socket } from 'socket.io-client';
 import { config } from '../config/config';
 
@@ -20,16 +20,20 @@ export const close = () => {
   socket.disconnect();
 };
 
-export const createRoom = (data: { identity: string }) => {
+export const createRoom = (data: CreateRoom) => {
   const { socket } = getSocket();
   socket.emit(Events.ROOM_CREATE, data);
+};
+
+export const joinRoom = (data: ClientJoin) => {
+  const { socket } = getSocket();
+  socket.emit(Events.CLIENT_JOIN, data);
 };
 
 export function subscribeToEvent<T>(
   event: Events,
   callback: (data: T, clientId: string) => void,
 ) {
-  console.log(`subscribed to ${event}`);
   const { socket } = getSocket();
   socket.on(event, data => callback(data, socket?.id));
 }

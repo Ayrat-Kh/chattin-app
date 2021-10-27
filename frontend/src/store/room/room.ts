@@ -57,14 +57,22 @@ export const initializeWebsocket = createAsyncThunk(
             selfClientId,
           }),
         );
+        dispatch(
+          roomSlice.actions.setParticipants([
+            {
+              identity: response.identity,
+              clientId: selfClientId,
+            },
+          ]),
+        );
       },
     );
 
     subscribeToEvent<ClientJoinedResponse>(
-      Events.ROOM_CREATED,
+      Events.CLIENT_JOINED,
       (response, selfClientId) => {
         console.log(
-          `${Events.ROOM_CREATED}: ${JSON.stringify(response, null, 2)}`,
+          `${Events.CLIENT_JOINED}: ${JSON.stringify(response, null, 2)}`,
         );
         const { participants, clientId, ...selfInfo } = response;
 
@@ -83,6 +91,13 @@ export const initializeWebsocket = createAsyncThunk(
 export const { setRoomHost } = roomSlice.actions;
 
 export const isRoomHost = (state: AppState) => state.room.isRoomHost;
+export const getParticipants = (state: AppState) => state.room.participants;
+export const getRoomId = (state: AppState) => state.room.roomId;
+export const getSelfInfo = (state: AppState) => ({
+  selfClientId: state.room.selfClientId,
+  identity: state.room.identity,
+  roomId: state.room.roomId,
+});
 
 export default roomSlice.reducer;
 

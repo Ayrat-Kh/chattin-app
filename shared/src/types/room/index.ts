@@ -16,7 +16,7 @@ export type CreateRoomResponse = {
   roomId: string;
 };
 
-export type JoinRoom = {
+export type ClientJoin = {
   identity: string;
   roomId: string;
 };

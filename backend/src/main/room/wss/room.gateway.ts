@@ -7,11 +7,11 @@ import {
   WebSocketGateway,
 } from '@nestjs/websockets';
 import {
+  ClientJoin,
   ClientJoinedResponse,
   CreateRoom,
   CreateRoomResponse,
   Events,
-  JoinRoom,
   Room,
 } from '@shared/types/room';
 import { Socket } from 'socket.io';
@@ -46,6 +46,15 @@ export class RoomGateway implements OnGatewayDisconnect {
   ): Promise<void> {
     const roomId = uuid();
     await client.join(roomId);
+    this.rooms.push({
+      id: roomId,
+      participants: [
+        {
+          clientId: client.id,
+          identity: data.identity,
+        },
+      ],
+    });
     client.emit(Events.ROOM_CREATED, {
       ...data,
       roomId,
@@ -54,11 +63,10 @@ export class RoomGateway implements OnGatewayDisconnect {
 
   @SubscribeMessage(Events.CLIENT_JOIN)
   async handleClientJoining(
-    @MessageBody() data: JoinRoom,
+    @MessageBody() data: ClientJoin,
     @ConnectedSocket() client: Socket,
   ): Promise<void> {
     const room = this.getRoom(data.roomId);
-
     if (!room) {
       return;
     }
@@ -71,6 +79,12 @@ export class RoomGateway implements OnGatewayDisconnect {
     await client.join(data.roomId);
 
     client.to(data.roomId).emit(Events.CLIENT_JOINED, {
+      participants: room.participants,
+      clientId: client.id,
+      ...data,
+    } as ClientJoinedResponse);
+
+    client.emit(Events.CLIENT_JOINED, {
       participants: room.participants,
       clientId: client.id,
       ...data,
