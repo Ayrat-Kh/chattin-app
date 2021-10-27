@@ -19,11 +19,11 @@ const Checkbox = ({
       />
       <div
         className={
-          'absolute w-[20px] h-[20px] top-0 left-0 bg-gray-400 hover:bg-gray-300 after:hidden after:absolute after:block after:w-[6px] after:h-[12px] after:top-[2px] after:left-[6px] after:rotate-45 after:border-r-2 after:border-b-2 peer-checked:after:block peer-checked:bg-blue-400'
+          'absolute w-[20px] h-[20px] top-0 left-0 bg-gray hover:bg-gray-light after:hidden after:absolute after:block after:w-[6px] after:h-[12px] after:top-[2px] after:left-[6px] after:rotate-45 after:border-r-2 after:border-b-2 after:border-white peer-checked:after:block peer-checked:bg-blue'
         }
       />
       {label && (
-        <div className="absolute left-[23px] top-[2px] text-xl text-gray-500">
+        <div className="absolute left-[23px] top-[2px] text-xl text-gray">
           {label}
         </div>
       )}

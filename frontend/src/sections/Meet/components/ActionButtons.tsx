@@ -15,7 +15,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
   onLeave,
 }) => {
   return (
-    <div className="h-40 bg-blue-600 rounded-t-lg flex justify-center items-center gap-2">
+    <div className="h-40 bg-blue rounded-t-lg flex justify-center items-center gap-2">
       <Button
         Icon={isMicOff ? MicOff : Mic}
         rounded

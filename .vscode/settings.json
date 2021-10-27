@@ -12,5 +12,7 @@
     "source.fixAll.eslint": true,
     "source.organizeImports": true
   },
+  "eslint.enable": true,
+  "eslint.alwaysShowStatus": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode"
 }

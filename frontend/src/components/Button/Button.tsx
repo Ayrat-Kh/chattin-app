@@ -53,7 +53,7 @@ const getClasses = ({
   rounded,
   outlined,
   buttonType,
-  fullWidth = false
+  fullWidth = false,
 }: {
   rounded: boolean;
   buttonType: ButtonTypes;
@@ -64,39 +64,39 @@ const getClasses = ({
     'select-none p-6 h-20 transition-opacity duration-100 font-semibold text-xl hover:opacity-80 active:opacity-90 border-2',
     rounded ? 'rounded-full' : 'rounded-md',
     {
-      ['w-full']: fullWidth
-    }
+      ['w-full']: fullWidth,
+    },
   ];
   if (outlined) {
     switch (buttonType) {
       case 'primary':
-        classes.push('bg-blue-500 text-white border-blue-500');
+        classes.push('bg-blue text-white border-blue');
         break;
       case 'secondary':
-        classes.push('bg-gray-600 text-white border-gray-600');
+        classes.push('bg-gray text-white border-gray');
         break;
       case 'thertiary':
-        classes.push('bg-red-500 text-white border-red-500');
+        classes.push('bg-red text-white border-red');
         break;
       case 'semi-crystal':
         classes.push(
-          'bg-gray-300 text-white border-gray-200 bg-opacity-40 border-opacity-5',
+          'bg-gray-light text-white border-gray-light bg-opacity-40 border-opacity-5',
         );
         break;
     }
   } else {
     switch (buttonType) {
       case 'primary':
-        classes.push('bg-white text-blue-500 border-blue-500');
+        classes.push('bg-white text-blue border-blue');
         break;
       case 'secondary':
-        classes.push('bg-white text-gray-600 border-gray-300');
+        classes.push('bg-white text-gray border-gray-light');
         break;
       case 'thertiary':
-        classes.push('bg-white text-red-600 border-red-600');
+        classes.push('bg-white text-red border-red');
         break;
       case 'semi-crystal':
-        classes.push('bg-white text-gray-600 border-gray-300');
+        classes.push('bg-white text-gray border-gray-light');
         break;
     }
   }

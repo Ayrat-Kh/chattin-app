@@ -9,7 +9,7 @@ const mockParticipants = [
     identity: 'Mark',
   },
   {
-    identity: 'Peter',
+    identity: 'W w Peter',
   },
   {
     identity: 'Bosh',

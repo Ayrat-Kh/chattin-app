@@ -12,17 +12,17 @@ const DefaultInput: React.FC<
     <input
       ref={forwardedRef}
       className={cn('border focus:outline-none px-2 py-1 w-full text-xl mt-1', {
-        'border-red-400': hasError,
-        'border-gray-300 focus:border-gray-400': !hasError,
+        'border-red': hasError,
+        'border-gray-light focus:border-gray': !hasError,
       })}
       {...pickedProps}
     />
   );
 };
 
-export default React.forwardRef<HTMLInputElement, DefaultInputProps>((props, ref) => (
-  <DefaultInput forwardedRef={ref} {...props} />
-));
+export default React.forwardRef<HTMLInputElement, DefaultInputProps>(
+  (props, ref) => <DefaultInput forwardedRef={ref} {...props} />,
+);
 
 export type DefaultInputProps = Partial<
   Pick<
