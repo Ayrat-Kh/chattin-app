@@ -40,9 +40,7 @@ export class RoomService {
       participant => participant.clientId === clientId,
     );
 
-    room.participants = room.participants.filter(
-      participant => participant !== participant,
-    );
+    room.participants = room.participants.filter(p => p !== participant);
 
     this.rooms = [...this.rooms.filter(room => room.id !== room.id), room];
 
