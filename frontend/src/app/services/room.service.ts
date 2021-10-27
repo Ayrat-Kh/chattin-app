@@ -15,6 +15,11 @@ export const connect = (): Promise<Socket> => {
   });
 };
 
+export const close = () => {
+  const { socket } = getSocket();
+  socket.disconnect();
+};
+
 export const createRoom = (data: { identity: string }) => {
   const { socket } = getSocket();
   socket.emit(Events.ROOM_CREATE, data);
@@ -22,11 +27,11 @@ export const createRoom = (data: { identity: string }) => {
 
 export function subscribeToEvent<T>(
   event: Events,
-  callback: (data: T) => void,
+  callback: (data: T, clientId: string) => void,
 ) {
   console.log(`subscribed to ${event}`);
   const { socket } = getSocket();
-  socket.on(event, data => callback(data));
+  socket.on(event, data => callback(data, socket?.id));
 }
 
 const getSocket = (() => {
