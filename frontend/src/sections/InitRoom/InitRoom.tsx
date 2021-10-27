@@ -1,9 +1,8 @@
-import { createRoom } from '@frontend/app/services/wss';
+import { createRoom } from '@frontend/app/services/room.service';
 import { ValidatorBuilder } from '@frontend/app/validator-builder/validator-builder';
 import Button from '@frontend/components/Button/Button';
 import Checkbox from '@frontend/components/form/Checkbox/Checkbox';
 import Input from '@frontend/components/form/Input/Input';
-import useWss from '@frontend/hooks/useWss';
 import { isRoomHost, setRoomHost } from '@frontend/store/room/room';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/router';
@@ -46,16 +45,13 @@ const InitRoomForm = ({ isRoomHost }: { isRoomHost: boolean }) => {
     resolver: yupResolver(isRoomHost ? hostSchema : joinSchema),
   });
 
-  const [wss] = useWss();
-
   const handleSubmitValid = useCallback(
     (values: MeetingFormSchema) => {
-      console.log('values', wss, isRoomHost);
-      if (isRoomHost && wss !== null) {
-        createRoom(wss, { identity: values.name });
+      if (isRoomHost) {
+        createRoom({ identity: values.name });
       }
     },
-    [wss, isRoomHost],
+    [isRoomHost],
   );
 
   const goHome = useCallback(() => void push('/'), [push]);

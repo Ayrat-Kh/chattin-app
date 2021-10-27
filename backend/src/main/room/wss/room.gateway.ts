@@ -6,7 +6,7 @@ import {
   SubscribeMessage,
   WebSocketGateway,
 } from '@nestjs/websockets';
-import { WssTypes } from '@shared/types/wss';
+import { CreateRoom, Events } from '@shared/types/room';
 import { Socket } from 'socket.io';
 import { v4 as uuid } from 'uuid';
 
@@ -14,18 +14,17 @@ import { v4 as uuid } from 'uuid';
 export class RoomGateway implements OnGatewayInit {
   afterInit() {}
 
-  @SubscribeMessage(WssTypes.CREATE_ROOM)
+  @SubscribeMessage(Events.ROOM_CREATE)
   async createRoom(
-    @MessageBody() data: { identity: string },
+    @MessageBody() data: CreateRoom,
     @ConnectedSocket() client: Socket,
-  ): Promise<{ identity: string; roomId: string }> {
+  ): Promise<void> {
+    console.log('create room');
     const roomId = uuid();
     await client.join(roomId);
-
-    console.log(`created room by: ${data.identity}`);
-    return {
+    client.emit(Events.ROOM_CREATED, {
       ...data,
       roomId,
-    };
+    });
   }
 }
