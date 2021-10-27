@@ -1,12 +1,4 @@
-import { Controller, Post } from '@nestjs/common';
-import { RoomService } from '../services/room.service';
+import { Controller } from '@nestjs/common';
 
 @Controller('v1/room')
-export class RoomController {
-  constructor(private readonly roomService: RoomService) {}
-
-  @Post()
-  createRoom(): string {
-    return this.roomService.createRoom();
-  }
-}
+export class RoomController {}

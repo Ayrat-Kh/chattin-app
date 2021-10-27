@@ -9,33 +9,35 @@ import {
 import {
   ClientJoin,
   ClientJoinedResponse,
+  ClientLeftResponse,
   CreateRoom,
   CreateRoomResponse,
   Events,
-  Room,
 } from '@shared/types/room';
 import { Socket } from 'socket.io';
 import { v4 as uuid } from 'uuid';
+import { RoomService } from '../services/room.service';
 
 @WebSocketGateway(DEFAULT_WSS_PORT, { cors: true })
 export class RoomGateway implements OnGatewayDisconnect {
-  private rooms: Room[] = [];
+  constructor(private readonly roomService: RoomService) {}
 
   handleDisconnect(client: Socket) {
-    const room = this.rooms.find(room =>
-      room.participants?.find(
-        participant => participant.clientId === client.id,
-      ),
-    );
+    const room = this.roomService.getRoomByClientId(client.id);
 
     if (!room) {
       return;
     }
-    room.participants = room.participants.filter(
-      participant => participant.clientId === client.id,
-    );
-    this.rooms = [...this.rooms.filter(room => room.id !== room.id), room];
-    client.to(room.id).emit(Events.CLIENT_LEFT, { clientId: client.id });
+
+    const leftParticipant = this.roomService.removeClient(client.id);
+    client
+      .to(room.id)
+      .emit(Events.CLIENT_LEFT, {
+        clientId: client.id,
+        participants: room.participants,
+        roomId: room.id,
+        identity: leftParticipant?.identity,
+      } as ClientLeftResponse);
     client.leave(room.id);
   }
 
@@ -46,15 +48,13 @@ export class RoomGateway implements OnGatewayDisconnect {
   ): Promise<void> {
     const roomId = uuid();
     await client.join(roomId);
-    this.rooms.push({
-      id: roomId,
-      participants: [
-        {
-          clientId: client.id,
-          identity: data.identity,
-        },
-      ],
-    });
+    this.roomService.createRoom(
+      {
+        clientId: client.id,
+        identity: data.identity,
+      },
+      roomId,
+    );
     client.emit(Events.ROOM_CREATED, {
       ...data,
       roomId,
@@ -66,7 +66,7 @@ export class RoomGateway implements OnGatewayDisconnect {
     @MessageBody() data: ClientJoin,
     @ConnectedSocket() client: Socket,
   ): Promise<void> {
-    const room = this.getRoom(data.roomId);
+    const room = this.roomService.getRoom(data.roomId);
     if (!room) {
       return;
     }
@@ -89,9 +89,5 @@ export class RoomGateway implements OnGatewayDisconnect {
       clientId: client.id,
       ...data,
     } as ClientJoinedResponse);
-  }
-
-  getRoom(roomId: string): Room | undefined {
-    return this.rooms.find(room => room.id === roomId);
   }
 }

@@ -28,6 +28,13 @@ export type ClientJoinedResponse = {
   roomId: string;
 };
 
+export type ClientLeftResponse = {
+  participants: Participant[];
+  clientId: string;
+  identity: string;
+  roomId: string;
+};
+
 export type Participant = {
   clientId: string;
   identity: string;

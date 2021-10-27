@@ -2,6 +2,7 @@ import { subscribeToEvent } from '@frontend/app/services/room.service';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
   ClientJoinedResponse,
+  ClientLeftResponse,
   CreateRoomResponse,
   Events,
   Participant,
@@ -85,6 +86,15 @@ export const initializeWebsocket = createAsyncThunk(
         }
       },
     );
+
+    subscribeToEvent<ClientLeftResponse>(Events.CLIENT_LEFT, response => {
+      console.log(
+        `${Events.CLIENT_LEFT}: ${JSON.stringify(response, null, 2)}`,
+      );
+      const { participants } = response;
+
+      dispatch(roomSlice.actions.setParticipants(participants));
+    });
   },
 );
 
