@@ -2,7 +2,7 @@ import React from 'react';
 import DefaultInput, { DefaultInputProps } from './DefaultInput';
 import InputContainer from './InputContainer';
 
-const Input: React.FC<InputProps & { inputRef: React.ForwardedRef<any> }> = ({
+const Input: React.FC<InputProps & { inputRef: React.ForwardedRef<HTMLInputElement> }> = ({
   hightlightError = true,
   showError = true,
   error,
@@ -20,7 +20,7 @@ const Input: React.FC<InputProps & { inputRef: React.ForwardedRef<any> }> = ({
   </InputContainer>
 );
 
-export default React.forwardRef<any, InputProps>((props, ref) => (
+export default React.forwardRef<HTMLInputElement, InputProps>((props, ref) => (
   <Input {...props} inputRef={ref} />
 ));
 

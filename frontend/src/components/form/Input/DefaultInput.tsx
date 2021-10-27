@@ -1,8 +1,8 @@
-import React from 'react';
 import cn from 'classnames';
+import React from 'react';
 
 const DefaultInput: React.FC<
-  { forwardedRef: React.ForwardedRef<any> } & DefaultInputProps
+  { forwardedRef: React.ForwardedRef<HTMLInputElement> } & DefaultInputProps
 > = ({ forwardedRef, hasError, ...inputProps }) => {
   const pickedProps = Object.fromEntries(
     Object.entries(inputProps).filter(([, value]) => Boolean(value)),
@@ -20,7 +20,7 @@ const DefaultInput: React.FC<
   );
 };
 
-export default React.forwardRef<any, DefaultInputProps>((props, ref) => (
+export default React.forwardRef<HTMLInputElement, DefaultInputProps>((props, ref) => (
   <DefaultInput forwardedRef={ref} {...props} />
 ));
 

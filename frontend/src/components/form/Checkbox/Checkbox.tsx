@@ -7,7 +7,7 @@ const Checkbox = ({
   label,
 }: {
   inputProps?: CheckBoxProps['inputProps'];
-  inputRef: any;
+  inputRef: React.ForwardedRef<HTMLInputElement>;
   label?: string;
 }) => {
   return (
@@ -31,7 +31,7 @@ const Checkbox = ({
   );
 };
 
-export default React.forwardRef<any, CheckBoxProps>(
+export default React.forwardRef<HTMLInputElement, CheckBoxProps>(
   ({ inputProps, label }, ref) => (
     <Checkbox {...{ inputProps, inputRef: ref, label }} />
   ),

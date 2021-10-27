@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 const Button: React.FC<ButtonProps> = ({
   children,
@@ -12,7 +12,7 @@ const Button: React.FC<ButtonProps> = ({
   rounded = false,
 }) => {
   const classes = useMemo(
-    () => getClasses({ rounded, outlined, buttonType }),
+    () => getClasses({ rounded, outlined, buttonType, fullWidth }),
     [rounded, outlined, buttonType],
   );
   return (
@@ -53,14 +53,19 @@ const getClasses = ({
   rounded,
   outlined,
   buttonType,
+  fullWidth = false
 }: {
   rounded: boolean;
   buttonType: ButtonTypes;
   outlined: boolean;
+  fullWidth?: boolean;
 }) => {
   const classes = [
     'select-none p-6 h-20 transition-opacity duration-100 font-semibold text-xl hover:opacity-80 active:opacity-90 border-2',
     rounded ? 'rounded-full' : 'rounded-md',
+    {
+      ['w-full']: fullWidth
+    }
   ];
   if (outlined) {
     switch (buttonType) {
